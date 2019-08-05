@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "596687338227",
+    "firebase_url": "https://andellachallenge2.firebaseio.com",
+    "project_id": "andellachallenge2",
+    "storage_bucket": "andellachallenge2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596687338227:android:da484481b38cb0b5",
+        "android_client_info": {
+          "package_name": "com.ahmedteleb.andelachallenge2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596687338227-qf02n0ac89rdnk1ge70asep145c83co6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahmedteleb.andelachallenge2",
+            "certificate_hash": "94a38a2e0eed19876a6e856b2b70c63ed7f8ed73"
+          }
+        },
+        {
+          "client_id": "596687338227-30o0q7cmunclr82t7mch09hpq3doqror.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbJbr3PzbgjhZXAcvVpGZGOcNidyLmmgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596687338227-30o0q7cmunclr82t7mch09hpq3doqror.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
