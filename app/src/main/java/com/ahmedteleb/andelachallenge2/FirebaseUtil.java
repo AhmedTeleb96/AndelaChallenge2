@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,7 +44,10 @@ public class FirebaseUtil {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                     if (firebaseAuth.getCurrentUser() == null) {
+                        isAdmin = false;
+                        callerActivity.showMenu();
                         FirebaseUtil.signIn();
+
                     }
                     else {
                         String userId = firebaseAuth.getUid();
@@ -76,13 +79,38 @@ public class FirebaseUtil {
                         .setIsSmartLockEnabled(false)
                         .build(),
                 RC_SIGN_IN);
+
     }
+
 
     private static void checkAdmin(String uid) {
         FirebaseUtil.isAdmin=false;
-        DatabaseReference ref = mFirebaseDatabase.getReference().child("administrators")
+        final DatabaseReference ref = mFirebaseDatabase.getReference().child("administrators")
                 .child(uid);
-        ChildEventListener listener = new ChildEventListener() {
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    Toast.makeText(caller.getBaseContext(), "Admin", Toast.LENGTH_LONG).show();
+
+                    FirebaseUtil.isAdmin=true;
+                    caller.showMenu();
+                }
+                else {
+
+                    Toast.makeText(caller.getBaseContext(), "Not Admin", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*ChildEventListener listener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 FirebaseUtil.isAdmin=true;
@@ -109,7 +137,7 @@ public class FirebaseUtil {
 
             }
         };
-        ref.addChildEventListener(listener);
+        ref.addChildEventListener(listener);*/
     }
 
     public static void attachListener() {

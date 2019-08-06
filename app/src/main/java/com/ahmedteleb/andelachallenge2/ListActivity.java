@@ -17,10 +17,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class ListActivity extends AppCompatActivity {
+    private static final int RC_SIGN_IN = 123;
+
     /*ArrayList<TravelDeal> deals;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
-    private ChildEventListener mChildListener;*/
+        private FirebaseDatabase mFirebaseDatabase;
+        private DatabaseReference mDatabaseReference;
+        private ChildEventListener mChildListener;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,8 @@ public class ListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_activity_menu, menu);
         MenuItem insertMenu = menu.findItem(R.id.insert_menu);
+
+
         if (FirebaseUtil.isAdmin == true) {
             insertMenu.setVisible(true);
         }
@@ -59,9 +63,10 @@ public class ListActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Log.d("Logout", "User Logged Out");
                                 FirebaseUtil.attachListener();
+
                             }
                         });
-                FirebaseUtil.detachListener();
+                  FirebaseUtil.detachListener();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -81,7 +86,7 @@ public class ListActivity extends AppCompatActivity {
         final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
         LinearLayoutManager dealsLayoutManager =
-                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+                new LinearLayoutManager(this);
         rvDeals.setLayoutManager(dealsLayoutManager);
         FirebaseUtil.attachListener();
     }
@@ -89,4 +94,6 @@ public class ListActivity extends AppCompatActivity {
     public void showMenu() {
         invalidateOptionsMenu();
     }
+
+
 }
